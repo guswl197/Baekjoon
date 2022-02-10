@@ -45,5 +45,8 @@
     <ClCompile Include="숨바꼭질.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="스타트링크.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
