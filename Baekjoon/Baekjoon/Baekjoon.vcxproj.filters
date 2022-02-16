@@ -57,5 +57,11 @@
     <ClCompile Include="맥주 마시면서 걸어가기.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="전구와 스위치.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="거스름돈.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
