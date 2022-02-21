@@ -1,30 +1,40 @@
 #include <iostream>
+#include <vector>
 #include <string>
 #include <algorithm>
 
 using namespace std;
 
-int number[10];
-
 int main(void) {
-	string a; 
-	cin >> a;
-	int temp = 0; 
-	for (int i = 0; i < a.size(); i++) {
-		number[a[i] - '0']++;
-		temp += a[i] - '0'; 
-	}
-	if (temp % 3 == 0 && number[0] != 0) {
-		for (int i = 9; i >= 0; i--) {
-			for (int j = 0; j < number[i]; j++) {
-				cout << i; 
-			}
-		}
-	}
-	else {
-		cout << -1;
+	string str;
+	string ans; 
+	vector<int> v;
+	int sum = 0, ten = 0; 
+	cin >> str; 
+
+	for (int i = 0; i < str.size(); i++) {
+		v.push_back(str[i]); 
 	}
 
-	cout << '\n'; 
+	for (int i = 0; i < v.size(); i++) {
+		if (v[i] == '0') {
+			ten = 1;
+		}
+		sum += v[i]; 
+	}
+
+	if (sum % 3 != 0 || ten == 0) {
+		cout << -1 << '\n'; 
+		return 0; 
+	}
+
+	sort(v.begin(), v.end(), greater<int>()); 
+
+	for (int i = 0; i < v.size(); i++) {
+		ans += v[i]; 
+	}
+	
+	cout << ans << '\n';
+
 	return 0; 
 }
