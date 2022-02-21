@@ -1,32 +1,38 @@
 #include <iostream>
 #include <string>
-#include <vector>
 
 using namespace std;
 
 int main(void) {
 	string str;
-	string temp = ""; 
-	cin >> str;
-	int result = 0;
-	bool minus = false;
+	int minus = 0; 
+	int ans = 0; 
+	string num;
+	cin >> str; 
 
-	for (int i = 0; i <= str.size(); i++) {
-		if (str[i] == '+' || str[i] == '-' || str[i] == '\0') {
-			if (minus == true) {
-				result += -stoi(temp); 
-			}
-			else {
-				result += stoi(temp); 
-			}
-			temp = "";
-			if (str[i] == '-') {
-				minus = true;
-			}
-			continue;
+	for (int i = 0; i < str.size(); i++) {
+		if (str[i] == '-') {
+			minus = 1;
 		}
-		temp += str[i];
+		else if (minus == 1 && str[i]=='+') {
+			str[i] = '-'; 
+		}
 	}
-	cout << result << '\n'; 
+
+	int i = 0; 
+		while (1) {
+			num += str[i++];
+			if (str[i] == '+' || str[i] == '-' ) {
+				ans += stoi(num); 
+				num = "";
+			}
+			if (i == str.size()) {
+				ans += stoi(num); 
+				break; 
+			}
+		}
+
+	cout << ans << '\n'; 
+
 	return 0; 
 }

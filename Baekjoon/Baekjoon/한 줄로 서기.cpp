@@ -5,9 +5,9 @@ using namespace std;
 
 int main(void) {
 	int n;
-	cin >> n; 
+	cin >> n;
 	int left;
-	vector<int> ans(n); 
+	vector<int> ans(n);
 
 	for (int i = 0; i < n; i++) {
 		cin >> left;
@@ -23,9 +23,9 @@ int main(void) {
 		}
 	}
 
-		for (int i = 0; i < n; i++) {
-			cout << ans[i] << " "; 
-		}
-		cout << "\n"; 
-		return 0;
+	for (int i = 0; i < n; i++) {
+		cout << ans[i] << " ";
+	}
+	cout << "\n";
+	return 0;
 }
