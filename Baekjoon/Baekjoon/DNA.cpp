@@ -5,61 +5,55 @@
 
 using namespace std;
 
-bool compare(string a, string b) {
-	return a > b; 
-}
-
 int main(void) {
 	int n, m;
-	int num=0; 
-	string ans; 
-	cin >> n >> m; 
+	int sum = 0;  
+	cin >> n >> m;
 	vector<string> v(n); 
+	string ans;
 
 	for (int i = 0; i < n; i++) {
 		cin >> v[i]; 
 	}
 
 	for (int i = 0; i < m; i++) {
-		int a = 0, t = 0, g = 0, c = 0;
-		int ma; 
+		int num = 0;
+		int t = 0, a = 0, g = 0, c = 0;
 		for (int j = 0; j < n; j++) {
-			if (v[j][i] == 'A') {
-				a++;
+			if (v[j][i] == 'T') {
+				t++; 
 			}
-			else if (v[j][i] == 'T') {
-				t++;
+			else if (v[j][i] == 'A') {
+				a++;
 			}
 			else if (v[j][i] == 'G') {
 				g++;
 			}
-			else { //C
+			else { //C 
 				c++; 
 			}
 		}
-		ma = max(a, t);
-		ma = max(ma, g);
-		ma = max(ma, c); 
 
-		if (ma == a) {
+		num = max(a, c); 
+		num = max(num, g); 
+		num = max(num, t); 
+
+		if (num == a) {
 			ans += 'A'; 
-			num += n - a; 
 		}
-		else if (ma == c) {
+		else if (num == c) {
 			ans += 'C';
-			num += n - c;
 		}
-		else if (ma == g) {
+		else if (num == g) {
 			ans += 'G';
-			num += n - g;
 		}
-		else {
+		else { //t 
 			ans += 'T';
-			num += n - t;
 		}
+		sum += n - num; 
+
 	}
 
-	cout << ans << '\n'<<num<<'\n'; 
-
+	cout << ans << '\n' << sum << '\n'; 
 	return 0; 
 }
