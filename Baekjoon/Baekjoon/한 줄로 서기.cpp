@@ -6,19 +6,19 @@ using namespace std;
 int main(void) {
 	int n;
 	cin >> n;
-	int left;
+	int num;
 	vector<int> ans(n);
 
 	for (int i = 0; i < n; i++) {
-		cin >> left;
+		cin >> num;
 
 		for (int j = 0; j < n; j++) {
-			if (left == 0 && ans[j] == 0) {
+			if (num == 0 && ans[j] == 0) {
 				ans[j] = i + 1;
 				break;
 			}
 			else if (ans[j] == 0) {
-				left--;
+				num--;
 			}
 		}
 	}
@@ -29,3 +29,5 @@ int main(void) {
 	cout << "\n";
 	return 0;
 }
+
+
