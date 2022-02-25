@@ -5,16 +5,16 @@
 using namespace std;
 
 priority_queue<int, vector<int>, greater<int>> pq;
-int N; 
+int N;
 
 int main(void) {
-	int n; 
+	int n;
 	int sum = 0;
 
-	cin >> N; 
+	cin >> N;
 	for (int i = 0; i < N; i++) {
-		cin >> n; 
-		pq.push(n); 
+		cin >> n;
+		pq.push(n);
 	}
 
 	while (pq.size() > 1) {
@@ -23,10 +23,10 @@ int main(void) {
 		n1 = pq.top(), pq.pop();
 		n2 = pq.top(), pq.pop();
 		sum += (n1 + n2);
-		pq.push(n1 + n2); 
+		pq.push(n1 + n2);
 	}
 
-	cout << sum << '\n'; 
+	cout << sum << '\n';
 
-	return 0; 
+	return 0;
 }
