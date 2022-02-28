@@ -126,5 +126,8 @@
     <ClCompile Include="UCPC는 무엇의 약자일까.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="폴리오미노.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
