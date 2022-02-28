@@ -123,5 +123,8 @@
     <ClCompile Include="문서 검색.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="UCPC는 무엇의 약자일까.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
