@@ -9,7 +9,7 @@ int main(void) {
 	int ans = 0;
 	cin >> n >> k;
 	vector<int> schedule(k);
-	vector<int> tab(n,0);
+	vector<int> tab(n, 0);
 
 	for (int i = 0; i < k; i++) {
 		cin >> schedule[i];
