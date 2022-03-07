@@ -207,5 +207,8 @@
     <ClCompile Include="동물원.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="오르막 수.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
