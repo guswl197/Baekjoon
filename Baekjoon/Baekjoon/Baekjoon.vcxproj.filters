@@ -195,5 +195,8 @@
     <ClCompile Include="제곱수의 합.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="합분해.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
