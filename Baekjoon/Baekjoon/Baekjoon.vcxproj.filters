@@ -201,5 +201,8 @@
     <ClCompile Include="1, 2, 3 더하기 3.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="RGB거리.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
