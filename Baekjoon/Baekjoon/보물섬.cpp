@@ -6,6 +6,7 @@
 using namespace std;
 
 int n, m;
+int num = 0;
 char arr[51][51]; 
 int visit[51][51]; 
 int dx[4] = { 1,-1,0,0 }; 
@@ -48,18 +49,16 @@ int main(void){
 			if (arr[i][j] == 'L') {
 				memset(visit, 0, sizeof(visit)); 
 				bfs(i, j);
-				int num = 0;
 				for (int i = 0; i < n; i++) {
 					for (int j = 0; j < m; j++) {
 						num = max(num, visit[i][j]);
 					}
 				}
-				v.push_back(num);
 			}
 
 		}
 	}
 
-	cout <<*max_element(v.begin(), v.end())-1<<'\n'; 
+	cout << num-1 << '\n'; 
 	return 0; 
 }
