@@ -26,13 +26,8 @@ void bfs() {
 			if (visit[x] == 0) {
 				visit[x] = 1;
 				q.push(x);
-				if (arr[x] > 0) {
-					arr[x] = min(arr[top] + 1, arr[x]);
-				}
-
-				else {
-					arr[x] = arr[top] + 1;
-				}
+				arr[x] = arr[top] + 1;
+				
 			}
 			if (x == k) {
 				return;
@@ -49,5 +44,3 @@ int main(void) {
 	cout << arr[k] << '\n';
 	return 0;
 }
-? 2022 GitHub, Inc.
-Terms
