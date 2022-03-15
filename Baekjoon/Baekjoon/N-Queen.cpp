@@ -24,6 +24,7 @@ void nqeen(int x) {
 			if (check(x)) {
 				nqeen(x + 1);
 			}
+			col[x] = 0;
 		}
 	}
 }
