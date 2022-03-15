@@ -47,7 +47,6 @@ int main(void) {
 	}
 
 	dfs(0,1);
-
 	cout << ans << '\n';
 	return 0; 
 }

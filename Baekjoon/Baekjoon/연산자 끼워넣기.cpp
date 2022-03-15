@@ -3,7 +3,6 @@ using namespace std;
 
 int MAX = -1000000000;
 int MIN = 1000000000;
-
 int Operator[4];
 int num[11];
 int N;
