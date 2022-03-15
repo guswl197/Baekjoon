@@ -1,11 +1,11 @@
 #include<iostream>
 using namespace std;
 
-int MAX = -1000000000; 
-int MIN = 1000000000; 
+int MAX = -1000000000;
+int MIN = 1000000000;
 
-int Operator[4]; 
-int num[11]; 
+int Operator[4];
+int num[11];
 int N;
 
 void dfs(int result, int count) {
@@ -16,12 +16,12 @@ void dfs(int result, int count) {
 		if (MAX < result) {
 			MAX = result;
 		}
-		return; 
+		return;
 	}
 
 	for (int i = 0; i < 4; i++) {
 		if (Operator[i] != 0) {
-			Operator[i]--; 
+			Operator[i]--;
 			if (i == 0) {
 				dfs(result + num[count + 1], count + 1);
 			}
@@ -34,24 +34,24 @@ void dfs(int result, int count) {
 			else if (i == 3) {
 				dfs(result / num[count + 1], count + 1);
 			}
-			Operator[i]++; 
+			Operator[i]++;
 		}
 	}
 }
 
-int main(){
+int main() {
 	cin >> N;
 
-	for (int i = 0; i < N; i++){
+	for (int i = 0; i < N; i++) {
 		cin >> num[i];
 	}
 
-	for (int i = 0; i < 4; i++){
+	for (int i = 0; i < 4; i++) {
 		cin >> Operator[i];
 	}
 
-	dfs(num[0], 0); 
+	dfs(num[0], 0);
 
-	cout << MAX << "\n" << MIN<<'\n';
-	return 0; 
+	cout << MAX << "\n" << MIN << '\n';
+	return 0;
 }
