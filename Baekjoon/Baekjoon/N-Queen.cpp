@@ -2,34 +2,34 @@
 
 using namespace std;
 
-int col[15]; 
-int n, total = 0; 
+int col[15];
+int n, total = 0;
 
 bool check(int level)
 {
 	for (int i = 0; i < level; i++)
 		if (col[i] == col[level] || abs(col[level] - col[i]) == level - i)
 			return false;
-	
+
 	return true;
 }
 
 void nqeen(int x) {
 	if (x == n) {
-		total++; 
+		total++;
 	}
 	else {
 		for (int i = 0; i < n; i++) {
-			col[x] = i; 
+			col[x] = i;
 			if (check(x)) {
-				nqeen(x + 1); 
+				nqeen(x + 1);
 			}
 		}
 	}
 }
 int main(void) {
 	cin >> n;
-	nqeen(0); 
+	nqeen(0);
 	cout << total << '\n';
-	return 0; 
+	return 0;
 }
