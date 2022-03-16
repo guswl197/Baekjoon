@@ -261,5 +261,11 @@
     <ClCompile Include="상어 초등학교.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="카이사르 암호.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="요세푸스 문제.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
