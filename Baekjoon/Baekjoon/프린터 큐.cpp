@@ -14,6 +14,7 @@ int main(void) {
 		cin >> n >> m; 
 		queue<pair<int, int>> q; 
 		priority_queue<int> pq; 
+
 		for (int j = 0; j < n; j++) {
 			cin >> ipt; 
 			q.push({ j, ipt }); 
