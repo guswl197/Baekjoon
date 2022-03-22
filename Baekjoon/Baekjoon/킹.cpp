@@ -1,91 +1,81 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
-#include <cstring>
 
 using namespace std;
 
-bool check(int first,int second,int x, int y ) {
-	if (first + x >= 1 && first + x <= 8 && second + y >= 1 && second + y <= 8) {
-		return true; 
+string king, stone; 
+int n;  
+pair<int, int> k, s; 
+int board[9][9]; 
+
+bool check(int a, int b) {
+	if (a <= 0 || a > 8 || b <= 0 || b > 8) {
+		return false;
 	}
-	return false; 
+	return true; 
 }
 
 int main(void) {
-	int n;
-	string king; 
-	string stone;  
-	cin >> king;
-	cin >> stone; 
-	cin >> n;
-	vector<string> v(n); 
+	cin >> king >> stone >> n;
+	vector<string> m(n + 1);
 	for (int i = 0; i < n; i++) {
-		cin >> v[i]; 
+		cin >> m[i]; 
 	}
 
-	pair<int, int> pk = { king[0] - 'A' + 1,king[1]-'0' };
-	pair<int, int> ps  = { stone[0] - 'A' + 1,stone[1]-'0' };
+	k.first = king[0] - 'A' + 1;
+	k.second = king[1] - '0'; 
+	s.first = stone[0] - 'A' + 1; 
+	s.second = stone[1] - '0';
 
 	for (int i = 0; i < n; i++) {
-		int x=0, y=0; 
-		if (v[i] == "R") {
-				x += 1; 
+		int x = 0, y = 0; 
+		if (m[i] == "R") {
+			y = 1; 
 		}
-		else if (v[i] == "L") {
-				x -= 1;
+		else if (m[i] == "L") {
+			y = -1; 
 		}
-		else if (v[i] == "B") {
-				y-= 1;
+		else if (m[i] == "B") {
+			x = -1;
 		}
-		else if (v[i] == "T") {
-				y += 1;
+		else if (m[i] == "T") {
+			x = 1;
 		}
-		else if (v[i] == "RT") {
-				x += 1;
-				y += 1;
+		else if (m[i] == "RT") {
+			x = 1, y = 1; 
 		}
-		else if (v[i] == "LT") {
-				x -= 1;
-				y += 1;
+		else if (m[i] == "LT") {
+			x = 1, y = -1;
 		}
-		else if (v[i] == "RB") {
-				x += 1;
-				y -= 1;
+		else if (m[i] == "RB") {
+			x = -1, y = 1; 
 		}
-		else if (v[i] == "LB") {
-				x -= 1;
-				y -= 1;
+		else if (m[i] == "LB") {
+			x = -1, y = -1; 
 		}
 
-		if (check(pk.first, pk.second, x, y)) {
-			pk.first += x;
-			pk.second += y;
-		}
-		else {
-			continue; 
-		}
-
-		if (pk.first == ps.first && pk.second == ps.second) {
-			if (check(ps.first, ps.second, x, y)) {
-				ps.first += x;
-				ps.second += y;
+		if (check(k.first + y, k.second + x)){
+			if (k.first + y == s.first && k.second + x == s.second) {
+				if (check(s.first + y, s.second + x)) {
+					k.first += y, k.second += x; 
+					s.first += y, s.second += x;
+				}
 			}
 			else {
-				pk.first -= x;
-				pk.second -= y;
+				k.first += y, k.second += x;
 			}
 		}
 	}
 
-	string kans= "", sans = "";
+	string kans = "";
+	kans+= k.first + 'A' -1;
+	kans += k.second + '0';
+	string sans = "";
+	sans += s.first + 'A' - 1;
+	sans += s.second + '0';
+	std::cout <<kans<< '\n';
+	std::cout << sans << '\n';
 
-	kans += pk.first + 'A' - 1;
-	kans += pk.second+'0'; 
-	sans += ps.first + 'A' - 1;
-	sans += ps.second + '0';
-
-	cout << kans << '\n'<<sans<<'\n';
 	return 0; 
 }
