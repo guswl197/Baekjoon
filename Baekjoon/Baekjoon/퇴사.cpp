@@ -22,6 +22,6 @@ int main(void) {
 		d[i+1] = max(d[i], d[i + 1]);
 	}
 
-	cout << d[n + 1] << '\n';
+	cout << d[n + 1]<< '\n';
 	return 0; 
 }
