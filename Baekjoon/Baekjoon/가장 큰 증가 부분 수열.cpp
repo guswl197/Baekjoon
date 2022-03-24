@@ -1,26 +1,28 @@
 #include <iostream>
+#include <vector>
 #include <algorithm>
 
 using namespace std;
 
-int a[1001]; 
-int d[1001]; 
+int d[1005]; 
 
-int main(void) {
+int main() {
 	int n;
-	cin >> n; 
+	cin >> n;
+	vector<int> v(n+1); 
 	for (int i = 1; i <= n; i++) {
-		cin >> a[i]; 
+		cin >> v[i]; 
 	}
 
-	d[1] = a[1]; 
+	d[1] = v[1]; 
 	for (int i = 2; i <= n; i++) {
-		d[i] = a[i]; // 길이가 자기자신포함 1일 수도 있기 때문에 
+		d[i] = v[i];
 		for (int j = 1; j < i; j++) {
-			if (a[i] > a[j] && d[i] < d[j] + a[i]) {
-				d[i] = d[j] + a[i]; 
+			if (v[i] > v[j] && d[i] < d[j] + v[i]) {
+				d[i] = d[j] + v[i]; 
 			}
 		}
+
 	}
 
 	int ans = 0; 
@@ -28,6 +30,6 @@ int main(void) {
 		ans = max(ans, d[i]); 
 	}
 
-	cout << ans << '\n';
+	cout << ans << endl;
 	return 0; 
 }

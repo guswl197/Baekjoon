@@ -1,33 +1,31 @@
 #include <iostream>
 #include <algorithm>
+#include <vector>
 
 using namespace std;
 
-int a[100001];
-int d[100001];
+int d[100005];
 
-int main(void) {
+int main() {
 	int n;
-	cin >> n;
+	cin >> n; 
+	vector<int> v(n + 1);
 	for (int i = 1; i <= n; i++) {
-		cin >> a[i];
+		cin >> v[i]; 
 	}
-	
-	d[1] = a[1]; 
+
 	for (int i = 1; i <= n; i++) {
-		if (d[i - 1] > 0) {
-			d[i] = a[i] + d[i - 1]; 
-		}
-		else {
-			d[i] = a[i]; 
+		d[i] = v[i];
+		if (d[i] < d[i - 1] + v[i]) {
+			d[i] = d[i - 1] + v[i]; 
 		}
 	}
 
-	int ans = d[1];
-	for (int i = 2; i <= n; i++) {
+	int ans = d[1]; 
+	for (int i = 1; i <= n; i++) {
 		ans = max(ans, d[i]); 
 	}
 
-	cout << ans << '\n';
+	cout << ans << endl;
 	return 0; 
 }
