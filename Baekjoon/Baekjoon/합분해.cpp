@@ -2,8 +2,9 @@
 
 using namespace std;
 
-long long d[201][201]; //k, n
-int main(void) {
+long long d[201][201]; 
+
+int main() {
 	int n, k;
 	cin >> n >> k;
 	d[0][0] = 1LL;
@@ -16,6 +17,6 @@ int main(void) {
 		}
 	}
 
-	cout << d[k][n] % 1000000000 << '\n'; 
-	return 0; 
+	cout << d[k][n] % 1000000000 << '\n';
+	return 0;
 }
