@@ -34,6 +34,5 @@ int main() {
             result++;
         }
     }
-    
     cout << result;
 }
