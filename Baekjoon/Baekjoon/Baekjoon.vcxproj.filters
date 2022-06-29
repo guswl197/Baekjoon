@@ -297,9 +297,6 @@
     <ClCompile Include="아기 상어.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="연습cpp.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="퇴사.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -322,6 +319,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="나는야 포켓몬 마스터 이다솜.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="그림.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
