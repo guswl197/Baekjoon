@@ -14,7 +14,7 @@ bool check(int level)
 	return true;
 }
 
-void nqeen(int x) {
+void nqueen(int x) {
 	if (x == n) {
 		total++;
 	}
@@ -22,7 +22,7 @@ void nqeen(int x) {
 		for (int i = 0; i < n; i++) {
 			col[x] = i;
 			if (check(x)) {
-				nqeen(x + 1);
+				nqueen(x + 1);
 			}
 			col[x] = 0;
 		}
@@ -30,7 +30,7 @@ void nqeen(int x) {
 }
 int main(void) {
 	cin >> n;
-	nqeen(0);
+	nqueen(0);
 	cout << total << '\n';
 	return 0;
 }
