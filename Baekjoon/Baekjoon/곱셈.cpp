@@ -7,7 +7,7 @@ long long ans;
 
 long long mul(long long a, long long b, long long c) {
 	if (b == 1) {
-		return a%c; 
+		return a % c;
 	}
 
 	long long val = mul(a, b / 2, c);
@@ -18,12 +18,12 @@ long long mul(long long a, long long b, long long c) {
 		return val;
 	}
 	//b- odd
-	return val*a%c; 
+	return val * a%c;
 }
 int main() {
 	cin >> a >> b >> c;
-	ans= mul(a, b, c);
+	ans = mul(a, b, c);
 
 	cout << ans << '\n';
-	return 0; 
+	return 0;
 }
