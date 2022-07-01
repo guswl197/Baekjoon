@@ -2,11 +2,12 @@
 
 using namespace std;
 
-int n, m; 
+int n, m;
 int arr[10]; 
+int visit[10]; 
 
-void dfs(int pos, int cnt) {
-	if (cnt == m) {
+void backTracking(int cnt) {
+	if (cnt==m) {
 		for (int i = 0; i < m; i++) {
 			cout << arr[i] << ' ';
 		}
@@ -14,16 +15,15 @@ void dfs(int pos, int cnt) {
 	}
 	else {
 		for (int i = 1; i <= n; i++) {
-			arr[cnt] = i; 
-			dfs(i + 1, cnt + 1); 
+				arr[cnt] = i; 
+				backTracking(cnt + 1); 
 		}
 	}
 }
 
-int main(void) {
-	cin >> n >> m;
+int main() {
+	cin >> n>>m; 
+	backTracking(0); 
 
-	dfs(1, 0); 
-	
 	return 0; 
 }
