@@ -32,7 +32,7 @@ int main(void) {
 	}
 
 	for (int i = 0; i < t; i++) {
-		cout << d[v[i]] % 1000000009 << '\n';
+		cout <<d[v[i]] % 1000000009<< '\n';
 	}
 
 	return 0; 
