@@ -17,7 +17,7 @@ int main(void) {
 	for (int i = 1; i <= n; i++) {
 		d[i] = a[i];
 		for (int j = 1; j < i; j++) {
-			d[i] = min(d[j] + d[i - j], d[i]);
+			d[i] = min(d[j] + d[i-j], d[i]);
 		}
 	}
 
