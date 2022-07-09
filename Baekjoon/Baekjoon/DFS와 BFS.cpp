@@ -51,7 +51,7 @@ int main(void) {
 	cin >> n >> m >> v;
 	memset(arr, 0, sizeof(arr)); 
 
-	for (int i = 1; i <=m; i++) {
+	for (int i = 1; i<=m; i++) {
 		int a, b; 
 		cin >> a >> b; 
 		arr[a][b] = arr[b][a] = 1; 
