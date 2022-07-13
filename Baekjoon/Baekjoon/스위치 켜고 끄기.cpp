@@ -26,7 +26,7 @@ void girlSolve(int num){
     while(1){
         left-=1;  
         right+=1; 
-        if(left<=0 || right > n || arr[left] != arr[right]){
+        if(left <= 0 || right > n || arr[left] != arr[right]){
             left+=1; 
             right-=1;
             break; 
@@ -73,5 +73,6 @@ int main(){
             j=0; 
         }
     }
+    
     return 0; 
 }
