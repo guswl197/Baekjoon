@@ -55,6 +55,6 @@ int main() {
 	if (cnt == 0) {
 		ans = -1; 
 	}
-	cout << cnt << '\n' << ans+1 << '\n';
+	cout << cnt << endl << ans+1 <<endl;
 	return 0; 
 }
