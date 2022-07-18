@@ -24,7 +24,7 @@ int main(){
         sum = 0; 
 
         for(int i=0 ; i<vk.size(); i++){
-            sum+= vk[i]/mid; 
+            sum += vk[i]/mid; 
         }
 
         if(sum >= k){
