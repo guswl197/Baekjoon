@@ -21,7 +21,6 @@ int main() {
 	
 	cin >> n; 
 	auto cur = li.end(); 
-	//cur--; 
 
 	while (n--) {
 		cin >> c; 
