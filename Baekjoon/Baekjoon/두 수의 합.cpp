@@ -2,29 +2,34 @@
 
 using namespace std;
 
-int n,x;
-int ans; 
-bool check[2000005]; 
-int a[1000001]; 
+int arr[2000001];
+int ans;
 
-int main(){
-    ios::sync_with_stdio(0); 
-    cin.tie(0); 
+int main() {
+	ios::sync_with_stdio(0);
+	cin.tie(0);
 
-    cin>>n; 
-    for(int i=0; i<n; i++){
-      cin>>a[i]; 
-    }
+	int n;
+	cin >> n; 
+	vector<int> v;
+	for (int i = 0; i < n; i++) {
+		int x;
+		cin >> x;
+		v.push_back(x); 
+	}
+	int x; 
+	cin >> x; 
 
-    cin>>x; 
+	for (int i = 0; i < v.size(); i++) {
+		if (arr[v[i]] == 1) {
+			ans++;
+		}
 
-    for(int i=0 ; i< n ; i++){
-        if(x-a[i] >0 && check[x-a[i]]){
-            ans++;
-        }
-        check[a[i]]= true;
-    }
-    
-    cout<<ans<<'\n'; 
-    return 0; 
+		if (x - v[i] > 0) {
+			arr[x - v[i]] = 1;
+		}
+	}
+
+	cout << ans << '\n'; 
+	return 0; 
 }
