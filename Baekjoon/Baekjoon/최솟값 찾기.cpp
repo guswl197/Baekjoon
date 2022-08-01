@@ -1,35 +1,29 @@
-#include <bits/stdc++.h>
+include <bits/stdc++.h>
 
 using namespace std;
+
+int n, l;
 deque<pair<int, int>> st;
-vector<int> ans; 
 
 int main() {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
-
-	int n, l;
-	int num; 
-	
 	cin >> n >> l; 
 
-	for (int i =0; i < n; i++) {
-		cin >> num;
-
-		while (!st.empty() && st.back().first >= num) {
-			st.pop_back();
+	for (int i = 1; i <= n; i++) {
+		int x; 
+		cin >> x; 
+		
+		while (!st.empty() && st.back().first > x) {
+			st.pop_back(); 
 		}
-
-		st.push_back({ num, i });
-
-		if (st.front().second < i - l + 1) {
+		if (!st.empty() && st.front().second < i - l + 1) {
 			st.pop_front(); 
 		}
+		st.push_back({ x, i });
 
-		cout << st.front().first << " ";
+		cout<<st.front().first << ' '; 
 	}
 
-	cout << '\n'; 
 	return 0; 
 }
-   
