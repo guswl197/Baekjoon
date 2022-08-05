@@ -27,6 +27,5 @@ void dfs(int cnt) {
 int main() {
 	cin>> n >> m; 
 	dfs(0); 
-
 	return 0;
 }
