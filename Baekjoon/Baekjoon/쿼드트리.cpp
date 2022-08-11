@@ -2,57 +2,57 @@
 
 using namespace std;
 
-int N; 
-const int MAX = 64; 
-int arr[MAX][MAX]; 
+int n; 
+char arr[65][65]; 
+string ans; 
 
-void solve(int n, int y, int x) {
-	if (n == 1) {
-		cout << arr[y][x];
-		return; 
-	}
-	bool zero = true, one = true;
-	for (int i = y; i < y + n; i++) {
-		for (int j = x; j < x + n; j++) {
-			if (arr[i][j]) {
-				zero = false;
-			}
-			else {
-				one = false;
+bool check(int x, int y, int n){
+
+char first = arr[x][y];
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			if (first != arr[x+i][y+j]) {
+				return false; 
 			}
 		}
 	}
+	return true; 
+}
 
-	if (zero) {
-		cout << 0;
+void recur(int x, int y, int n) {
+	if (n == 1) {
+		ans += arr[x][y]; 
+		return; 
 	}
-	else if (one) {
-		cout << 1;
-	}
+
+	if (check(x,y,n)) {
+		ans += arr[x][y];
+		return; 
+	} 
 	else {
-		cout << "("; 
-		solve(n / 2, y, x); 
-		solve(n / 2, y, x + n / 2);
-		solve(n / 2, y+n/2, x);
-		solve(n / 2, y+n/2, x + n / 2);
-		cout << ")";
+		ans += "("; 
+		recur(x, y, n / 2); 
+		recur(x, y + n / 2, n / 2); 
+		recur(x + n / 2, y, n / 2); 
+		recur(x + n / 2, y + n / 2, n / 2); 
+		ans += ")"; 
 	}
 
-	return; 
 }
 
 int main() {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
-	cin >> N; 
-	for (int i = 0; i < N; i++) {
-		string str; 
-		cin >> str;
-		for (int j = 0; j < N; j++) {
-			arr[i][j] = str[j] - '0'; 
+	cin >> n; 
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			cin >> arr[i][j]; 
 		}
 	}
 
-	solve(N, 0, 0); 
+	recur(0,0,n); 
+
+	cout << ans << '\n';
 	return 0; 
 }
