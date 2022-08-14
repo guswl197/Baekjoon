@@ -2,95 +2,104 @@
 
 using namespace std;
 
-int n, m;
-int board1[10][10];
-int board2[10][10];
-int dx[4] = { 1, 0,-1, 0 };
-int dy[4] = { 0, 1, 0, -1 }; 
-vector<pair<int, int>> cctv;
+int n, m; 
+int board[10][10];
+int cboard[10][10];
+int dx[] = {0,1,0,-1};
+int dy[] = {1,0,-1,0}; 
+vector<pair<int, int>> cctv; 
 
-void upd(int x, int y, int dir) {
-	dir %= 4;
-	while (1) {
-		x += dx[dir]; 
-		y += dy[dir]; 
-		if (x < 0 || x >= n || y < 0 || y >= m || board2[x][y] ==6) {
-			return; 
+void copyArray() {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			cboard[i][j] = board[i][j]; 
 		}
-		if (board2[x][y] != 0) {
+	}
+}
+
+void solve(int x, int y, int num) {
+	num %= 4; 
+	int nx=x, ny=y; 
+
+	while (1)
+	{
+		nx = nx+ dx[num];
+		ny = ny + dy[num]; 
+
+		if (cboard[nx][ny] == 6) {
+			break; 
+		}
+		if (nx < 0 || nx >= n || ny < 0 || ny >= m) {
+			break;
+		}
+		if (cboard[nx][ny] != 0) {
 			continue;
 		}
-
-		board2[x][y] = 7; 
+		cboard[nx][ny] = 7; 
 	}
 }
 
 int main() {
 	ios::sync_with_stdio(0);
-	cin.tie(0); 
+	cin.tie(0);
 	cin >> n >> m; 
-	int mn = 0; 
+	int mn = n * m; 
+
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < m; j++) {
-			cin >> board1[i][j]; 
-			if (board1[i][j] != 0 && board1[i][j] != 6) {
+			cin >> board[i][j]; 
+			if (board[i][j] != 0 && board[i][j] != 6) {
 				cctv.push_back({ i,j }); 
-			}
-			if (board1[i][j] == 0) {
-				mn++;
 			}
 		}
 	}
+	
 
-	for (int tmp = 0; tmp < (1 << (2 * cctv.size())); tmp++) {
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < m; j++) {
-				board2[i][j] = board1[i][j]; 
+	for (int i = 0; i<(1 << (2 * cctv.size())); i++) {
+		int tmp = i;
+		copyArray();
+
+		for (int j = 0; j < cctv.size(); j++) {
+			int num = tmp % 4;
+			tmp /= 4;
+			int x = cctv[j].first;
+			int y = cctv[j].second;
+
+			if (board[x][y] == 1) {
+				solve(x, y, num);
+			}
+			else if (board[x][y] == 2) {
+				solve(x, y, num);
+				solve(x, y, num + 2);
+			}
+			else if (board[x][y] == 3) {
+				solve(x, y, num);
+				solve(x, y, num + 1);
+			}
+			else if (board[x][y] == 4) {
+				solve(x, y, num);
+				solve(x, y, num + 1);
+				solve(x, y, num + 2);
+			}
+			else if (board[x][y] == 5) {
+				solve(x, y, num);
+				solve(x, y, num + 1);
+				solve(x, y, num + 2);
+				solve(x, y, num + 3);
 			}
 		}
 
-		int brute = tmp; 
-		for (int i = 0; i < cctv.size(); i++) {
-			int dir = brute % 4; 
-			brute /= 4;
-			int x = cctv[i].first;
-			int y = cctv[i].second;
-
-			if (board1[x][y] == 1) {
-				upd(x, y, dir); 
-			}
-			if (board1[x][y] == 2) {
-				upd(x, y, dir);
-				upd(x, y, dir+2);
-			}
-			if (board1[x][y] == 3) {
-				upd(x, y, dir);
-				upd(x, y, dir + 1);
-			}
-			if (board1[x][y] == 4) {
-				upd(x, y, dir);
-				upd(x, y, dir + 1);
-				upd(x, y, dir + 2);
-			}
-			if (board1[x][y] == 5) {
-				upd(x, y, dir);
-				upd(x, y, dir + 1);
-				upd(x, y, dir + 2);
-				upd(x, y, dir + 3);
+		int ans = n * m; 
+		for (int k = 0; k < n; k++) {
+			for (int l = 0; l < m; l++) {
+				if (cboard[k][l] != 0) {
+					ans--; 
+				}
 			}
 		}
-
-		int val = 0; 
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < m; j++) {
-				val += (board2[i][j] == 0); 
-			}
-		}
-
-		mn = min(mn, val); 
+		mn = min(mn, ans); 
 	}
 
 	cout << mn << '\n';
-
 	return 0; 
 }
