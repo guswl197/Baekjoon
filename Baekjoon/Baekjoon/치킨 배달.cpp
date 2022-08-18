@@ -1,92 +1,39 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
-int n, m; 
-int board1[51][51];
-int board2[51][51];
-int visited[51][51]; 
-int mn; 
-vector<pair<int, int>> choice; 
-vector<pair<int, int>> chicken; 
-vector<pair<int, int>> house; 
+#define X first
+#define Y second
 
-int distance(int x, int y ) {
-	int ans = 2 * n*n*n;
+int board[55][55];
+int n, m;
+vector<pair<int,int>> chicken;
+vector<pair<int,int>> house;
 
-	for (int i = 0; i<choice.size(); i++) {
-		int cx = choice[i].first; 
-		int cy = choice[i].second; 
-		ans = min(abs(cx - x) + abs(cy - y), ans); 
-	}
-
-	return ans; 
-}
-
-void checkBoard() {
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
-			board2[i][j] = board1[i][j]; 
-		}
-	}
-
-	for (int i = 0; i < m; i++) {
-		int x = choice[i].first;
-		int y = choice[i].second; 
-
-		board2[x][y] = 3; 
-	}
-	
-}
-
-void choiceChicken(int start,int cnt) {
-	if (cnt == m ) {
-		checkBoard();
-		int ans = 0; 
-
-		for (int i = 0; i < house.size(); i++) {
-			int x = house[i].first;
-			int y = house[i].second; 
-			ans+= distance(x,y);
-		}
-		mn = min(ans, mn); 
-		return; 
-	}
-	else {
-		for (int i = start; i < chicken.size(); i++) {
-			int x = chicken[i].first; 
-			int y = chicken[i].second; 
-
-			if (!visited[x][y]) {
-				visited[x][y] = 1; 
-				choice.push_back({ x,y });
-				choiceChicken(i, cnt + 1); 
-				visited[x][y] = 0;
-				choice.pop_back(); 
-			}
-		}
-	}
-}
-
-int main() {
-	ios::sync_with_stdio(0);
-	cin.tie(0);
-	cin >> n >> m; 
-	mn =2*n * n*n; 
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
-			cin >> board1[i][j];
-			if (board1[i][j] == 2) {
-				chicken.push_back({ i,j });
-			}
-			if (board1[i][j] == 1) {
-				house.push_back({ i,j });
-			}
-		}
-	}
-
-	choiceChicken(0,0); 
-	
-	cout << mn << '\n'; 
-	return 0; 
+int main(void) {
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cin >> n >> m;
+  for(int i = 0; i < n; i++){
+    for(int j = 0; j < n; j++){
+      cin >> board[i][j];
+      if(board[i][j] == 1) house.push_back({i, j});
+      if(board[i][j] == 2) chicken.push_back({i, j});      
+    }
+  }
+  vector<int> brute(chicken.size(), 1);
+  fill(brute.begin(), brute.begin() + chicken.size() - m, 0); // 앞의 chicken.size() - m 칸은 0, 뒤의 m칸은 1
+  int mn = 0x7f7f7f7f; // 답을 저장할 변수
+  do{
+    int dist = 0; // 도시의 치킨 거리를 저장할 변수
+    for(auto h : house){
+      int tmp = 0x7f7f7f7f; // 집의 치킨 거리를 저장할 변수
+      for(int i = 0; i < chicken.size(); i++){
+        if(brute[i] == 0) continue;      
+        tmp = min(tmp, abs(chicken[i].X - h.X) + abs(chicken[i].Y - h.Y)); // 집의 치킨 거리 갱신
+      }
+      dist += tmp;
+    }
+    mn = min(mn, dist);
+  }while(next_permutation(brute.begin(), brute.end()));
+  cout << mn;
 }
