@@ -1,27 +1,27 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-int d[305][3]; 
+int n;
+vector<int> v(305); 
+int d[305]; 
 
-int main(void) {
-	int n;
+int main() {
+	ios::sync_with_stdio(0);
+	cin.tie(0);
 	cin >> n; 
-	vector<int> v(n+1); 
-
 	for (int i = 1; i <= n; i++) {
-		cin >> v[i]; 
+		cin>>v[i]; 
 	}
 
-	d[1][1] = v[1];
+	d[1] = v[1]; 
+	d[2] = v[1] + v[2]; 
+	d[3] = max(v[1], v[2]) + v[3]; 
 
-	for (int i = 2; i <= n; i++) {
-		d[i][1] = max(d[i - 2][1], d[i - 2][2]) + v[i]; 
-		d[i][2] = d[i - 1][1] + v[i]; 
+	for (int i = 4; i <= n; i++) {
+		d[i] = max(d[i - 3]+v[i-1], d[i - 2]) + v[i]; 
 	}
 
-	cout << max(d[n][1],d[n][2]) << '\n'; 
+	cout << d[n] << '\n'; 
 	return 0; 
 }
