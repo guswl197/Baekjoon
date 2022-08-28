@@ -2,32 +2,38 @@
 
 using namespace std;
 
-string board[4]; 
+string wheel[4]; 
+int k; 
+int num, dir; 
+vector<int> dirs(5); 
 
-void go(int x, int dir) {
-	int dirs[4] = {}; 
-	dirs[x] = dir; 
+void rotateWheel() {
+	dirs[num] = dir; 
 
-	//왼쪽으로 회전을 전파
-	int idx = x; 
-	while (idx > 0 && board[idx][6] != board[idx - 1][2]) {
-		dirs[idx - 1] = -dirs[idx]; 
-		idx--; 
+	for (int i = num; i <3; i++) {
+		if (wheel[i][2] != wheel[i + 1][6]) {
+			dirs[i + 1] = -dirs[i]; 
+		}
+		else {
+			dirs[i + 1] = 0;
+		}
 	}
 
-	//오른쪽으로 회전을 전파
-	idx = x; 
-	while (idx < 3 && board[idx][2] != board[idx + 1][6]) {
-		dirs[idx + 1] = -dirs[idx]; 
-		idx++;
+	for (int i = num; i >0; i--) {
+		if (wheel[i][6] != wheel[i -1][2]) {
+			dirs[i - 1] = -dirs[i];
+		}
+		else {
+			dirs[i - 1] = 0;
+		}
 	}
 
 	for (int i = 0; i < 4; i++) {
-		if (dirs[i] == -1) {
-			rotate(board[i].begin(), board[i].begin() + 1, board[i].end()); 
+		if (dirs[i] == 1) { //시계 방향 
+			rotate(wheel[i].begin(), wheel[i].begin()+7, wheel[i].end()); 
 		}
-		else if (dirs[i] == 1) {
-			rotate(board[i].begin(), board[i].begin() + 7, board[i].end());
+		else if (dirs[i] == -1) { //반시계 방향 
+			rotate(wheel[i].begin(), wheel[i].begin() + 1, wheel[i].end());
 		}
 	}
 }
@@ -35,27 +41,26 @@ void go(int x, int dir) {
 int main() {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
-
-	for (int i = 0; i < 4; i++) {
-		cin >> board[i]; 
+	for (int i = 0; i < 4; i++) { 
+		cin >> wheel[i]; 
 	}
-
-	int k;
+	
 	cin >> k; 
-	while (k--) {
-		int x, dir;
-		cin >> x >> dir;
-		go(x - 1, dir); 
+	for (int i = 0; i < k; i++) {
+		cin >> num >> dir; 
+		num--; 
+		rotateWheel(); 
 	}
 
-	int ans = 0;
-	for (int i = 0; i < 4; i++) {
-		if (board[i][0] == '1') {
-			ans += (1 << i);
+	int ans = 0; 
+	int number = 1; 
+	for (int i = 0; i < 4; i++) { //s-1 , n-0 
+		if (wheel[i][0] == '1') {
+			ans += number; 
 		}
+		number *= 2; 
 	}
 
-	cout << ans<<'\n';
-
+	std::cout<< ans << '\n';
 	return 0; 
 }
