@@ -1,31 +1,37 @@
-#include <iostream>
-#include <algorithm>
+#include <bits/stdc++.h>
+
 using namespace std;
-int a[1001];
-int d[1001];
 
-int main(void) {
-	int n;
-	int result = 0;
+int n; 
+vector<int> v; 
+int d[1001]; 
+
+int main() {
+	ios::sync_with_stdio(0);
+	cin.tie(0);
 	cin >> n;
-
-	for (int i = 1; i <= n; i++) {
-		cin >> a[i];
+	for (int i = 0; i < n; i++) {
+		int x; 
+		cin >> x; 
+		v.push_back(x); 
 	}
-
-	for (int i = 1; i <= n; i++) {
-		d[i] = 1;
-		for (int j = 1; j < i; j++) {
-			if (a[i] > a[j] && d[j] + 1 > d[i]) {
-				d[i] = d[j] + 1; 
+	
+	d[0] = 1; 
+	for (int i = 1; i < n; i++) {
+		int mx = 0; 
+		for (int j = 0; j < i; j++) {
+			if (v[j] < v[i]) {
+				mx = max(mx, d[j]); 
 			}
 		}
+		d[i] = mx + 1; 
 	}
 
-	for (int i = 1; i <= n; i++) {
-		result = max(result, d[i]); 
+	int ans = 0; 
+	for (int i = 0; i < n; i++) {
+		ans = max(ans, d[i]); 
 	}
 
-	cout << result << '\n';
-	return 0;
+	cout << ans << '\n';
+	return 0; 
 }
