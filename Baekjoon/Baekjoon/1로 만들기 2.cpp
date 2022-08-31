@@ -3,8 +3,8 @@
 using namespace std;
 
 int n; 
-int d[1000001]; 
-int order[1000001];
+int d[1000005]; 
+int order[1000005];
 
 int main() {
 	ios::sync_with_stdio(0);
