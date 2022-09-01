@@ -5,6 +5,7 @@
 using namespace std;
 
 int d[1005];
+int ans;
 
 int main(void) {
 	int n;
@@ -27,7 +28,6 @@ int main(void) {
 		}
 	}
 	
-	int ans = 0;
 	for (int i = 1; i <= n; i++) {
 		ans = max(ans, d[i]); 
 	}
