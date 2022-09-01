@@ -31,6 +31,6 @@ int main(void) {
 	for (int i = 1; i <= n; i++) {
 		ans = max(ans, d[i]); 
 	}
-	cout << ans << '\n';
-	return 0; 
+
+	cout << ans << '\n'; 
 }
