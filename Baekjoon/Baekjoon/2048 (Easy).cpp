@@ -5,7 +5,7 @@ int board1[21][21];
 int board2[21][21];
 int n;
 
-//시계뱡향 90도
+//시계뱡향 - 90도
 void rotate() {
 	int tmp[21][21]; 
 	for (int i = 0; i < n; i++) {
@@ -82,5 +82,6 @@ int main() {
 			}
 		}
 	}
-	cout << mx << '\n'; 
+	cout << mx << '\n';
+	return 0;
 }
