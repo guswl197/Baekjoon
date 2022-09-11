@@ -2,8 +2,8 @@
 
 using namespace std;
 
-int n;
 vector<string> v; 
+int n; 
 
 bool cmp(string a , string b) {
 	if (a.size() < b.size()) {
@@ -12,7 +12,7 @@ bool cmp(string a , string b) {
 	else if (a.size() > b.size()) {
 		return false; 
 	}
-	else { //같을 때
+	else {  // a == b
 		return a < b; 
 	}
 }
