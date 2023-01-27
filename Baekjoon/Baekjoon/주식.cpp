@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int a[1000001];
+int main(void) {
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	int T; cin >> T;
+	while (T--) {
+		int n;
+		cin >> n;
+		for (int i = 0; i < n; ++i) {
+			cin >> a[i];
+		}
+		int max = a[n - 1]; 
+		long long ans = 0; 
+		for (int i= n - 2; i >= 0; i--) {
+			if (a[i] > max) {
+				max = a[i]; 
+			}
+			ans += max - a[i]; 
+		}
+		cout << ans << "\n"; 
+	}
+
+	return 0; 
+}
