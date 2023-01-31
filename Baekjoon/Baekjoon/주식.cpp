@@ -1,26 +1,35 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
-int a[1000001];
-int main(void) {
+int t;
+int n; 
+int arr[1000001]; 
+long long ans; 
+
+int main() {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
-	int T; cin >> T;
-	while (T--) {
-		int n;
+	
+	cin >> t;
+	while (t--) {
 		cin >> n;
-		for (int i = 0; i < n; ++i) {
-			cin >> a[i];
+		memset(arr, 0, sizeof(arr));
+		ans = 0; 
+		for (int i = 0; i < n; i++) {
+			cin >> arr[i]; 
 		}
-		int max = a[n - 1]; 
-		long long ans = 0; 
-		for (int i= n - 2; i >= 0; i--) {
-			if (a[i] > max) {
-				max = a[i]; 
+
+		int max = arr[n - 1];
+		for (int i = n - 2; i >= 0; i--) {
+			if (max >= arr[i]) {
+				ans += max - arr[i]; 
 			}
-			ans += max - a[i]; 
+			else {
+				max = arr[i]; 
+			}
 		}
-		cout << ans << "\n"; 
+		cout << ans << '\n'; 
 	}
 
 	return 0; 
