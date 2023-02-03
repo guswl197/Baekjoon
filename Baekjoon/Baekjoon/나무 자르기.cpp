@@ -1,43 +1,46 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-int n,m; 
-vector<int> v; 
+int n; 
+long long m; 
+long long arr[1000001]; 
+long long ans;
 
-int main(){
-    cin>>n>>m;
+bool solve(long long x) {
+	long long len = 0; 
+	for (int i = 0; i < n; i++) {
+		if (arr[i] > x) {
+			len += (arr[i] - x); 
+		}
+	}
 
-    for(int i=0; i<n ; i++){
-        int x; 
-        cin>>x;
-        v.push_back(x); 
-    }
+	return len >= m; 
+}
 
-    int start,end,mid,result=0; 
-    start=0, end= *max_element(v.begin(), v.end()); 
+int main() {
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	
+	cin >> n >> m; 
+	for (int i = 0; i < n; i++) {
+		cin >> arr[i]; 
+	}
 
-    while(start <= end){
-        mid=(start+end)/2; 
-        long long total=0; 
+	sort(arr, arr + n); 
+	int st = 0, en = arr[n - 1]; 
 
-        for(int i=0; i<n; i++){
-            if(v[i] > mid){
-                total+= v[i]- mid; 
-            }
-        }
+	while (st <= en) {
+		long long mid = (st + en) / 2;
+		if (solve(mid)) {
+			st = mid + 1;
+			ans = max(ans, mid); 
+		}
+		else {
+			en = mid - 1;
+		}
+	}
 
-        if(total < m){
-            end= mid-1; 
-        }
-        else{
-            result= mid; 
-            start= mid+1; 
-        }
-    }
-
-    cout<<result<<endl;
-    return 0; 
+	cout << ans << '\n';
+	return 0; 
 }
