@@ -2,42 +2,46 @@
 
 using namespace std;
 
-using ll = long long; 
-int n, m;
-int l[1000002]; 
+int m, n; 
+long long arr[1000001]; 
+int ans; 
 
 bool solve(int x) {
+
 	if (x == 0) {
 		return true; 
 	}
-	ll cnt = 0; 
+
+	long long cnt = 0; 
 	for (int i = 0; i < n; i++) {
-		cnt += l[i] / x; 
+		cnt += arr[i] / x; 
 	}
+
 	return cnt >= m; 
 }
 
 int main() {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
-
-	cin >> m >> n;
+	
+	cin >> m >> n; // 조카 수, 과자 수
 	for (int i = 0; i < n; i++) {
-		cin >> l[i];
+		cin >> arr[i]; 
 	}
 
-	int st = 0;
-	int en = *max_element(l, l + n);
-
-	while (st < en) {
-		int mid = (st + en + 1) / 2;
+	sort(arr, arr + n);
+	int st = 0, en = arr[n - 1]; 
+	while (st <= en) {
+		int mid = (st + en) / 2; 
 		if (solve(mid)) {
-			st = mid;
+			st = mid + 1; 
+			ans = max(ans, mid); 
 		}
 		else {
-			en = mid - 1;
+			en = mid - 1; 
 		}
 	}
 
-	cout << st << '\n'; 
+	cout << ans << '\n'; 
+	return 0; 
 }
