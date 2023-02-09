@@ -39,6 +39,7 @@ int main() {
 		else {
 			mx = max(mx, ans); 
 		}
+		
 		ans = 0;
 		memset(sushi, 0, sizeof(sushi));
 		flag = true;
