@@ -29,7 +29,6 @@ int main() {
 			break;
 		}
 	}
-
 	cout << mx << '\n';
 	return 0; 
 }
