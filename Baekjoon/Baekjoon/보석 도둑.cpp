@@ -1,47 +1,43 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <algorithm>
+#include <bits/stdc++.h>
 
-#define MAX 300001
 using namespace std;
 
-int N; // 보석 수
-int K; // 가방수
+#define X first
+#define Y second
 
-
-pair<int, int> v_jewerly[MAX];
-int v_bag[MAX];
-priority_queue<int, vector<int>, less<int>> pq;
-
-
-long long solve() {
-	sort(v_jewerly, v_jewerly + N);
-	sort(v_bag, v_bag + K);
-
-	int idx = 0;
-	long long sum = 0;
-
-	for (int i = 0; i < K; i++) {
-		while (idx < N && v_bag[i] >= v_jewerly[idx].first) {
-			pq.push(v_jewerly[idx].second);
-			idx++;
-		}
-		if (!pq.empty()) {
-			sum += pq.top();
-			pq.pop();
-		}
-	}
-	return sum;
-}
+int n, k; 
+pair<int, int> jewel[300003];
+multiset<int> bag; 
 
 int main() {
-	cin >> N >> K;
-	for (int i = 0; i < N; ++i) {
-		cin >> v_jewerly[i].first >> v_jewerly[i].second;
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cin >> n >> k; 
+
+	for (int i = 0; i < n; i++) {
+		cin >> jewel[i].Y >> jewel[i].X; 
 	}
-	for (int i = 0; i < K; ++i) {
-		cin >> v_bag[i];
+	sort(jewel, jewel + n); 
+
+	for (int i = 0; i < k; i++) {
+		int c; 
+		cin >> c; 
+		bag.insert(c); 
 	}
-	cout << solve();
+
+	long long ans = 0; 
+
+	for (int i = n - 1; i >= 0; i--) {
+		int m, v; 
+		tie(v, m) = jewel[i];
+		auto it = bag.lower_bound(m);
+		if (it == bag.end()) {
+			continue; 
+		}
+		ans += v; 
+		bag.erase(it); 
+	}
+
+	cout << ans << '\n'; 
+	return 0; 
 }
