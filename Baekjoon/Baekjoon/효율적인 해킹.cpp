@@ -1,67 +1,57 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <algorithm>
-#include <cstring>
+#include <bits/stdc++.h>
 
 using namespace std;
 
 int n, m; 
-int cnt; 
-vector<vector<int>> v(10001); 
-queue<int> q; 
-vector<int> ans(10001);
-int visit[10001];
-vector<int> idx; 
-int Max;
+vector<vector<int>> v(10001);
+int visited[10001]; 
+int mx; 
+vector<pair<int, int>> ans; 
 
-int bfs(int x) {
-	visit[x] = 1;
-	q.push(x);
+void bfs(int x) {
+	int cnt = 0; 
+	queue<int> q; 
+	q.push(x); 
 
 	while (!q.empty()) {
-		int nx = q.front(); 
+		int mx = q.front(); 
 		q.pop(); 
 
-		for (int i = 0; i < v[nx].size(); i++) {
-			if (visit[v[nx][i]] == 0) {
+		for (int i = 0; i < v[mx].size(); i++) {
+			if (!visited[v[mx][i]] && v[mx][i]!= x) {
 				cnt++;
-				visit[v[nx][i]] = 1;
-				q.push(v[nx][i]);
+				q.push(v[mx][i]); 
+				visited[v[mx][i]] = visited[mx] + 1; 
 			}
 		}
 	}
 
-	return cnt;
+	mx = max(mx, cnt); 
+	ans.push_back({x, cnt});
 }
 
 int main() {
-	cin >> n >> m; 
-
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cin >> n >> m;
 	for (int i = 0; i < m; i++) {
 		int a, b;
-		cin >> a >> b;
+		cin >> a >> b; 
 		v[b].push_back(a); 
 	}
 
 	for (int i = 1; i <= n; i++) {
-		cnt = 0; 
-		memset(visit, 0, sizeof(visit));
-		ans[i]=bfs(i);
-	}
-
-	Max = *max_element(ans.begin(), ans.end()); 
-
-	for (int i = 1; i <= n; i++) {
-		if (Max == ans[i]) {
-			idx.push_back(i); 
+		if (v[i].size() != 0) {
+			memset(visited, 0, sizeof(visited));
+			bfs(i); 
 		}
 	}
 
-	sort(idx.begin(), idx.end()); 
-
-	for (int i = 0; i < idx.size(); i++) {
-		cout << idx[i] << ' ';
+	sort(ans.begin(), ans.end()); 
+	for (int i = 0; i < ans.size(); i++) {
+		if (mx == ans[i].second) {
+			cout << ans[i].first << ' '; 
+		}
 	}
 
 	return 0; 
