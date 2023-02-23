@@ -1,46 +1,53 @@
-#include <iostream>
-#include <queue>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-int t;
-int n, k;
-int arr[100001];
-int visit[100001];
+int n, m; 
+vector<int> v[20001]; 
+vector<int> visited(20001,-1); 
+queue<int> q; 
+int mx; 
+int cnt; 
 
-void bfs() {
-	queue<int> q;
-	q.push(n);
-	visit[n] = 1;
+void bfs(int x) {
+	q.push(x); 
+	visited[x] = 0; 
 
 	while (!q.empty()) {
-		int top = q.front();
-		q.pop();
-		for (int i = 0; i < 3; i++) {
-			int x = i == 0 ? top + 1 : i == 1 ? top - 1 : top * 2;
+		int nx = q.front(); 
+		q.pop(); 
 
-			if (x < 0 || x>100000) {
-				continue;
+		for (int i = 0; i < v[nx].size(); i++) {
+			if (visited[v[nx][i]] != -1) {
+				continue; 
 			}
-
-			if (visit[x] == 0) {
-				visit[x] = 1;
-				q.push(x);
-				arr[x] = arr[top] + 1;
-				
-			}
-			if (x == k) {
-				return;
-			}
+			visited[v[nx][i]] = visited[nx] + 1; 
+			mx = max(mx, visited[v[nx][i]]); 
+			q.push(v[nx][i]); 
 		}
 	}
 }
 
-int main(void) {
-	cin >> n >> k;
+int main() {
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cin >> n >> m; 
+	for (int i = 0; i < m; i++) {
+		int a, b; 
+		cin >> a >> b;
+		v[a].push_back(b), v[b].push_back(a); 
+	}
 
-	bfs();
+	bfs(1);
 
-	cout << arr[k] << '\n';
-	return 0;
+	int ans = n; 
+	for (int i = 2; i <= n; i++) {
+		if (mx == visited[i]) {
+			ans = min(ans, i); 
+			cnt++;
+		}
+	}
+
+	cout << ans << ' ' << mx<< ' ' << cnt << '\n';
+	return 0; 
 }
