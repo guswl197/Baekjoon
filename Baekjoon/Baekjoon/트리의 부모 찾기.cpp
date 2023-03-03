@@ -1,48 +1,34 @@
-#include <iostream> 
-#include <vector> 
-#include <queue>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-#define MAX 100001 
-int N;
-int ans[MAX];
-bool visit[MAX];
-vector<int> graph[MAX];
+int n; 
+vector<int> adj[100001]; 
+int p[100001]; 
 
-void bfs() {
-    queue<int> q;
-    visit[1] = true;
-    q.push(1);
-
-    while (!q.empty()) {
-        int parent = q.front();
-        q.pop();
-
-        for (int i = 0; i < graph[parent].size(); i++) {
-            int child = graph[parent][i];
-            if (!visit[child]) {
-                ans[child] = parent;
-                visit[child] = true;
-                q.push(child);
-            }
-        }
-    }
+void dfs(int cur) {
+	for (int nxt : adj[cur]) {
+		if (p[cur] == nxt) {
+			continue; 
+		}
+		p[nxt] = cur;
+		dfs(nxt); 
+	}
 }
 
 int main() {
-    cin >> N;
-    for (int i = 0; i < N - 1; i++) {
-        int x, y;
-        cin >> x >> y;
-        graph[x].push_back(y);
-        graph[y].push_back(x);
-    }
-
-    bfs();
-
-    for (int i = 2; i <= N; i++)
-        cout << ans[i] << "\n";
-
-    return 0;
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cin >> n; 
+	for (int i = 0; i < n - 1; i++) {
+		int u, v; 
+		cin >> u >> v; 
+		adj[u].push_back(v); 
+		adj[v].push_back(u); 
+	}
+	dfs(1); 
+	for (int i = 2; i <= n; i++) {
+		cout << p[i] << '\n'; 
+	}
+	return 0; 
 }
