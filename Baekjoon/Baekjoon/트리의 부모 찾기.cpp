@@ -2,17 +2,25 @@
 
 using namespace std;
 
-int n; 
+int n;
 vector<int> adj[100001]; 
-int p[100001]; 
+queue<int> q; 
+int parent[100001]; 
 
-void dfs(int cur) {
-	for (int nxt : adj[cur]) {
-		if (p[cur] == nxt) {
-			continue; 
+void bfs(int x) {
+	q.push(x); 
+
+	while (!q.empty()) {
+		int f = q.front(); 
+		q.pop(); 
+
+		for (int i = 0; i < adj[f].size(); i++) {
+			if (parent[f] == adj[f][i]) {
+				continue;
+			}
+			q.push(adj[f][i]); 
+			parent[adj[f][i]] = f; 
 		}
-		p[nxt] = cur;
-		dfs(nxt); 
 	}
 }
 
@@ -20,15 +28,17 @@ int main() {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 	cin >> n; 
-	for (int i = 0; i < n - 1; i++) {
-		int u, v; 
-		cin >> u >> v; 
-		adj[u].push_back(v); 
-		adj[v].push_back(u); 
+	for (int i = 0; i < n-1; i++) {
+		int a, b;
+		cin >> a >> b;
+		adj[a].push_back(b), adj[b].push_back(a); 
 	}
-	dfs(1); 
+
+	bfs(1);
+
 	for (int i = 2; i <= n; i++) {
-		cout << p[i] << '\n'; 
+		cout << parent[i] << '\n'; 
 	}
+
 	return 0; 
 }
